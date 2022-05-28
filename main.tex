@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{\textbf{NEA Title Here}}
+\author{Luca Djehiche}
+
+\begin{document}
+\maketitle
+\begin{center}candidate Number: 0611
+\\
+   |
+\\
+Centre Name: Barton Peveril College
+\\
+Centre Number: 58231
+\\
+|
+\end{center}
+\newpage
+\tableofcontents
+\newpage
+\section{\textbf{Analysis}}
+
+
+
+\subsection{Statement Of Investigation}
+
+
+\subsection{Background}
+
+
+\subsection{Expert}
+
+\newpage
+
+\subsection{Initial Research}
+\subsubsection{\textit{Viola Jones Algorithm}}
+\text{This approach considers the texture and shading of the object you are trying to identify. It relies on the designer identifying the key features of the object in terms of the areas that are on average darker or lighter than their surroundings. Viola Jones uses \textbf{AdaBoost} to generate a forest of stumps that classify the item through each stump’s amount of say. AdaBoost is a useful algorithm for decision trees as it can turn an array of linear classifications into a non linear form which is useful as data in reality is not always linearly split.}
+\subsubsection{\textit{AdaBoost}}
+\text{AdaBoost is a popular method for training a model based off of decision trees. The steps for AdaBoost are:}
+\begin{enumerate}
+    \item {Add a new value to each record which is the record’s sample weight. This is calculated as $$\frac{1}{Amount \; Of \; Records}$$}
+    \item {Generate stumps for each field in the dataset that may or may not be indicative of the correct classification.}
+    \item Then use the stumps to get the result of each stump’s classification
+    \item The stumps will produce a range of values that may or may not be correct for each record. Sum the correct and incorrect classifications for each datapoint in each field and then work out the Gini coefficient which is:
+    $$1 - \left[\left(\frac{Amt Identified Correctly}{Total Number Considered}\right)^2 - \left(\frac{Amt Identified Incorrectly}{Total Number Considered}\right)^2\right]$$
+    \item The stump with the lowest gini coefficient is then the most successful stump.
+    \item If the stump has a Gini coefficient of 0, that is your correct classifier and the algorithm does not need to run any further. 
+    \item Work out the amount of say for each stump with formula below where the total error is the sum of all of the sample weights of the records that the $$AmountOfSay = \frac{1}{2} log \left( \frac{1-TotalError}{TotalError} \right)$$
+    \item The amount of say indicates how accurate the stump is where an amount of say close to 0 says that the field has a 50 percent chance of outputting a correct classification and a positive amount of say tells us that there is some link between the stump and giving us a correct classification where the larger the number is, the better at classifying the data. A negative amount of say would therefore indicate that the stump mostly gets it wrong and therefore there may be an inverse relationship between the field and the correct classification.
+    \item Then, work out the new sample weights of each record. If the record was incorrectly classified by the most successful stump, increase the sample weight, if it was correctly classified by the stump, decrease the sample weight.
+    \begin{itemize}
+        \item to increase weight: $$NewWeight = SampleWeight \times e^{AmountOfSay}$$
+        \item to decrease weight: $$New Weight = SampleWeight \times e^{-AmountOfSay}$$
+    \end{itemize}
+    \item Then replace the sample weights with the new sample weights and start the algorithm from the beginning to get a forest of weak learners that will classify the data.
+    \item The forest can be used by running all trees to get those that give a true value as their answer and those that give false, summing the amounts of say of the stumps in each category and choosing the answer that is supported by the largest total amount of say.
+\end{enumerate}
+\newpage
+\subsection{Prototype}
+
+
+\subsection{Further Research}
+
+
+\subsection{Objectives}
+
+
+\subsection{Modelling Of Problem}
+
+
+\section{\textbf{Design}}
+
+
+\section{\textbf{Testing}}
+
+
+\section{\textbf{Evaluation}}
+
+
+\section{\textbf{Technical Solution}}
+
+\section{\textbf{References}}
+\bibliography{}
+
+\end{document}
